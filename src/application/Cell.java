@@ -1,6 +1,16 @@
 package application;
 
 public class Cell {
-	//This class is for the individual cells
+
+	private enum State {
+		HIDDEN,
+		REVEALED
+	}
+	
+	State _state;
+	
+	public void Cell() {
+		_state = State.HIDDEN;
+	}
 	
 }
