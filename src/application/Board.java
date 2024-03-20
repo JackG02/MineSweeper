@@ -1,7 +1,7 @@
 package application;
 
 public class Board {
-	Cell[][] _board = new Cell[10][10];
+	static Cell[][] _board = new Cell[10][10];
 	
 	int mines = 10;
 	
@@ -24,6 +24,13 @@ public class Board {
 		return true;
 	}
 	
+	public static Cell[][] getBoard() {
+		return _board;
+	}
+	
+	public void endGame() {
+		GameSceneController.endGame();
+	}
 }
 
 
