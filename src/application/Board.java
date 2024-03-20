@@ -29,9 +29,15 @@ public class Board {
 	private void revealCell(int x, int y) {
 		
 	}
+
+	public static Cell[][] getBoard() {
+		return _board;
+	}
 	
-	
-	
+	public void endGame() {
+		GameSceneController.endGame();
+	}
+
 }
 
 
