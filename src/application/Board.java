@@ -34,7 +34,7 @@ public class Board {
 		return _board;
 	}
 	
-	public void endGame() {
+	public static void endGame() {
 		GameSceneController.endGame();
 	}
 
