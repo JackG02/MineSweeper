@@ -18,7 +18,7 @@ public class Cell {
 		_neighborMines = -1;
 	}
 	
-	private void changeHiddenStatus() {
+	public void changeHiddenStatus() {
 		if(_isHidden) {
 			_isHidden = false;
 			if(_isMine) Board.endGame();
