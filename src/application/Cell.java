@@ -12,7 +12,7 @@ public class Cell {
 	
 	String _displayCharacter;
 	
-	public void Cell(int x, int y) {
+	public Cell(int x, int y) {
 		_isHidden = true;
 		_isMine = false;
 		_neighborMines = -1;
