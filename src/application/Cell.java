@@ -16,9 +16,11 @@ public class Cell {
 		_isHidden = true;
 		_isMine = false;
 		_neighborMines = -1;
+		xCoord = x;
+		yCoord = y;
 	}
 	
-	private void changeHiddenStatus() {
+	public void changeHiddenStatus() {
 		if(_isHidden) {
 			_isHidden = false;
 			if(_isMine) Board.endGame();
@@ -27,7 +29,7 @@ public class Cell {
 		_isHidden = true;
 	}
 	
-	private void determineDisplayCharacter() {
+	public void determineDisplayCharacter() {
 		if (_isHidden) {
 			if (_isFlagged) {
 				_displayCharacter = "?";
@@ -77,5 +79,12 @@ public class Cell {
 		return _isMine;
 	}
 	
+	public int getX() {
+		return xCoord;
+	}
+	
+	public int getY() {
+		return yCoord;
+	}
 }
 

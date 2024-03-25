@@ -4,6 +4,7 @@ public class Board {
 	static Cell[][] _board = new Cell[10][10];
 	
 	int mines = 10;
+	static int numHidden = 0;
 	
 	public void buildBoard() {
 		for (int row = 0; row < 10; row++) {
@@ -14,15 +15,16 @@ public class Board {
 	}
 	
 	public void checkBoard() {
-		int numHidden = 0;
+		int hidden1 = 0;
 		for (int row = 0; row < 10; row++) {
 			for (int col = 0; col < 10; col++) {
-				if (_board[row][col].isHidden()) {
-					numHidden += 1;
-					if (numHidden > mines) return;
+				if (_board[row][col].isHidden()) { 
+					hidden1 += 1;
+					if (hidden1 > mines) return;
 				}
 			}
 		} 
+		Board.numHidden = hidden1;
 		if (numHidden == mines) endGame();
 	}
 	
