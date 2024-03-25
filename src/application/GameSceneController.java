@@ -8,4 +8,7 @@ public class GameSceneController {
 	@FXML
 	private Label MinesLeft;
 
+	public static void endGame() {
+		return;
+	}
 }
