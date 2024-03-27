@@ -1,8 +1,7 @@
 package application;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 class CellTest {
 
@@ -55,14 +54,14 @@ class CellTest {
 		Board board = new Board();
 		board.buildBoard();
 		
-		board._board[0][0]._isMine = true;
-		board._board[0][1]._isMine = true;
-		board._board[0][2]._isMine = true;
-		board._board[1][0]._isMine = true;
-		board._board[1][2]._isMine = true;
-		board._board[2][0]._isMine = true;
-		board._board[2][1]._isMine = true;
-		board._board[2][2]._isMine = true;
+		Board._board[0][0]._isMine = true;
+		Board._board[0][1]._isMine = true;
+		Board._board[0][2]._isMine = true;
+		Board._board[1][0]._isMine = true;
+		Board._board[1][2]._isMine = true;
+		Board._board[2][0]._isMine = true;
+		Board._board[2][1]._isMine = true;
+		Board._board[2][2]._isMine = true;
 		
 		cell.determineDisplayCharacter();
 
