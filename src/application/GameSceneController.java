@@ -1,8 +1,10 @@
 package application;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.RowConstraints;
@@ -13,7 +15,7 @@ public class GameSceneController {
 	@FXML
 	private Label MinesLeft;
 	@FXML
-	private GridPane gameBoard;
+	public GridPane gameBoard;
 
 	
 	public void buildBoard() {
@@ -50,6 +52,21 @@ public class GameSceneController {
 			
 		}
 		
+		updateBoardVisuals();
+	}
+	
+	public void updateBoardVisuals() {
+		ObservableList<Node> children = gameBoard.getChildren();
+		for (int i = 0; i < children.size(); i++) {
+			int x = GridPane.getColumnIndex(children.get(i));
+			int y = GridPane.getRowIndex(children.get(i));
+			
+			Cell c = Board.getBoard()[y][x];
+			c.determineDisplayCharacter();
+			
+			Button b = (Button)children.get(i);
+			b.setText(c._displayCharacter);
+		}
 	}
 
 	// creates empty button size 30 by 30 for gridPane

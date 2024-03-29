@@ -40,6 +40,7 @@ public class Main extends Application {
 			
 			GameSceneController controller = loader.getController();
 			Board.assignController(controller);
+			Board.buildBoard();
 			controller.buildBoard();
 			
 		} catch(Exception e) {

@@ -6,7 +6,7 @@ public class Board {
 	int mines = 10;
 	static int numHidden = 0;
 	
-	public void buildBoard() {
+	public static void buildBoard() {
 		for (int row = 0; row < 10; row++) {
 			for (int col = 0; col < 10; col++) {
 				_board[row][col] = new Cell(row, col);
