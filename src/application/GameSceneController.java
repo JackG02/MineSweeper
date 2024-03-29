@@ -1,6 +1,8 @@
 package application;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
@@ -48,11 +50,31 @@ public class GameSceneController {
 			for (int rowIndex = 0; rowIndex < numRows; rowIndex++) {
 				Button button = createButton();
 				gameBoard.add(button, colIndex, rowIndex);
+				//http://www.java2s.com/example/java-api/javafx/scene/control/button/setonaction-1-0.html
+				
+				
+				button.setOnAction( new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						System.out.println(
+								"Button clicked at: " + 
+								GridPane.getRowIndex(button) + 
+								", " + 
+								GridPane.getColumnIndex(button));
+					}
+				});
+					
 			}
 			
 		}
 		
 		updateBoardVisuals();
+	}
+	
+	// creates empty button size 30 by 30 for gridPane
+	private Button createButton() {
+		Button button = new Button();
+		button.setMaxSize(30, 30);
+		return button;
 	}
 	
 	public void updateBoardVisuals() {
@@ -68,17 +90,13 @@ public class GameSceneController {
 			b.setText(c._displayCharacter);
 		}
 	}
-
-	// creates empty button size 30 by 30 for gridPane
-	private Button createButton() {
-		Button button = new Button();
-		button.setMaxSize(30, 30);
-		return button;
+	
+	private void buttonClick(int row, int col) {
+		System.out.println("Button clicked at: " + row + ", " + col);
 	}
 		
-	@FXML
 	public static void endGame() {
-		System.out.println("test");
+		System.out.println("End Game - Controller");
 		return;
 	}
 }
