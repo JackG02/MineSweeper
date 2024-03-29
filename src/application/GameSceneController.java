@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.ColumnConstraints;
@@ -51,7 +52,16 @@ public class GameSceneController {
 				Button button = createButton();
 				gameBoard.add(button, colIndex, rowIndex);
 				//http://www.java2s.com/example/java-api/javafx/scene/control/button/setonaction-1-0.html
-				
+			/*
+				button.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+					
+					
+					@Override
+					public void handle(MouseEvent e) {
+						System.out.println("test");
+					}
+				});
+				*/
 				
 				button.setOnAction( new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
@@ -62,12 +72,13 @@ public class GameSceneController {
 								GridPane.getColumnIndex(button));
 					}
 				});
+				
 					
 			}
 			
 		}
 		
-		updateBoardVisuals();
+		//updateBoardVisuals();
 	}
 	
 	// creates empty button size 30 by 30 for gridPane
@@ -99,4 +110,9 @@ public class GameSceneController {
 		System.out.println("End Game - Controller");
 		return;
 	}
+	@FXML
+	public void testMouseClick(MouseEvent e) {
+		System.out.println("test");
+	}
+	
 }
