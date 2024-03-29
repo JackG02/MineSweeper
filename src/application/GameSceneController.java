@@ -13,36 +13,45 @@ public class GameSceneController {
 	@FXML
 	private Label MinesLeft;
 	@FXML
-	private GridPane GameBoard;
+	private GridPane gameBoard;
 
-	int numRows = 10;
-	int numCols = 10;
 	
-	public void buildBoard( ) {
+	public void buildBoard() {
 		// allows rows to grow and set constraints for Height of gridPane
+		System.out.println(gameBoard.toString());
+//		System.out.println(GameBoard.getRowConstraints());
+//		System.out.println(GameBoard.getColumnConstraints());
+		
+		gameBoard.getRowConstraints().clear();
+		gameBoard.getColumnConstraints().clear();
+		
+		int numRows = 10;
+		int numCols = 10;
+		
 		for (int rowIndex = 0; rowIndex < numRows; rowIndex++) {
 			RowConstraints rc = new RowConstraints();
 			rc.setVgrow(Priority.ALWAYS);
 			rc.setFillHeight(true);
-			GameBoard.getRowConstraints().add(rc);
+			gameBoard.getRowConstraints().add(rc);
 		}
 		// allows Columns to grow and set constraints for Width of gridPane
 		for (int colIndex = 0; colIndex < numCols; colIndex++) {
 			ColumnConstraints cc = new ColumnConstraints();
 			cc.setHgrow(Priority.ALWAYS);
 			cc.setFillWidth(true);
-			GameBoard.getColumnConstraints().add(cc);
+			gameBoard.getColumnConstraints().add(cc);
 		}
 		// fills the board with buttons based on constraints made above
 		for (int colIndex = 0; colIndex < numCols; colIndex++) {
 			for (int rowIndex = 0; rowIndex < numRows; rowIndex++) {
 				Button button = createButton();
-				GameBoard.add(button, colIndex, rowIndex);
+				gameBoard.add(button, colIndex, rowIndex);
 			}
 			
 		}
 		
 	}
+
 	// creates empty button size 30 by 30 for gridPane
 	private Button createButton() {
 		Button button = new Button();
@@ -50,8 +59,9 @@ public class GameSceneController {
 		return button;
 	}
 		
-	
+	@FXML
 	public static void endGame() {
+		System.out.println("test");
 		return;
 	}
 }

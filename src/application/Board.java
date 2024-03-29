@@ -2,7 +2,7 @@ package application;
 
 public class Board {
 	static Cell[][] _board = new Cell[10][10];
-	
+	static GameSceneController controller;
 	int mines = 10;
 	static int numHidden = 0;
 	
@@ -38,6 +38,10 @@ public class Board {
 	
 	public static void endGame() {
 		GameSceneController.endGame();
+	}
+	
+	public static void assignController(GameSceneController c) {
+		controller = c;
 	}
 
 }
