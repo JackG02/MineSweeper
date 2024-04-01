@@ -4,6 +4,7 @@ public class Board {
 	static Cell[][] _board = new Cell[10][10];
 	static GameSceneController controller;
 	int mines = 10;
+	int flags = 0;
 	static int numHidden = 0;
 	
 	public static void buildBoard() {
@@ -42,6 +43,13 @@ public class Board {
 	
 	public static void assignController(GameSceneController c) {
 		controller = c;
+	}
+	
+	public int getFlag() {
+		return flags;
+	}
+	public void setFlag() {
+		
 	}
 
 }
