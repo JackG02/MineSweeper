@@ -1,6 +1,7 @@
 package application;
 
 public class Board {
+	
 	static Cell[][] _board = new Cell[10][10];
 	static GameSceneController controller;
 	int mines = 10;
@@ -28,7 +29,39 @@ public class Board {
 		if (numHidden == mines) endGame();
 	}
 	
-	private void revealCell(int x, int y) {
+	public static void revealCell(int x, int y) {
+		Cell cell = _board[x][y];
+		cell.changeHiddenStatus();
+		if(cell.isMine()) {
+			endGame();
+			return;
+		}
+		
+		cell.determineDisplayCharacter();
+		System.out.println("Cell neighbor mines: " + cell._neighborMines);
+		if(cell._neighborMines == 0) {
+
+			System.out.println("Revealing cell neighbors");
+			if (x < _board.length - 1) revealNeighbors(_board[x - 1][y], x + 1, y);
+			if (x > 0) revealNeighbors(_board[x - 1][y], x - 1, y);
+			if (y < _board.length - 1) revealNeighbors(_board[x][y + 1], x, y + 1);
+			if (y > 0) revealNeighbors(_board[x][y - 1], x, y - 1);
+		}
+	}
+	
+	private static void revealNeighbors(Cell c, int x, int y) {
+		if (c.isMine() || !c.isHidden()) {
+			System.out.println("Invalid cell");
+			return;}
+		if (c._neighborMines == -1) {c.findNeighborMines();}
+		if (c._neighborMines == 0) {
+			c.changeHiddenStatus();
+			
+			if (x < _board.length - 1) revealNeighbors(_board[x - 1][y], x + 1, y);
+			if (x > 0) revealNeighbors(_board[x - 1][y], x - 1, y);
+			if (y < _board.length - 1) revealNeighbors(_board[x][y + 1], x, y + 1);
+			if (y > 0) revealNeighbors(_board[x][y - 1], x, y - 1);
+		}
 		
 	}
 
@@ -37,6 +70,7 @@ public class Board {
 	}
 	
 	public static void endGame() {
+		System.out.println("End Game - Board");
 		GameSceneController.endGame();
 	}
 	

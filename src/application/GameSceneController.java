@@ -55,11 +55,18 @@ public class GameSceneController {
 				
 				button.setOnAction( new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
+						//Left Click
+						int row = GridPane.getRowIndex(button);
+						int col = GridPane.getColumnIndex(button);
 						System.out.println(
 								"Button clicked at: " + 
-								GridPane.getRowIndex(button) + 
-								", " + 
-								GridPane.getColumnIndex(button));
+								row + 
+								", " +
+								col
+								);
+
+						Board.revealCell(row, col);
+						updateBoardVisuals();
 					}
 				});
 					
@@ -93,6 +100,7 @@ public class GameSceneController {
 	
 	private void buttonClick(int row, int col) {
 		System.out.println("Button clicked at: " + row + ", " + col);
+		Board.revealCell(row, col);
 	}
 		
 	public static void endGame() {

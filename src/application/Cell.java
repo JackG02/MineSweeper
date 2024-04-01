@@ -23,7 +23,6 @@ public class Cell {
 	public void changeHiddenStatus() {
 		if(_isHidden) {
 			_isHidden = false;
-			if(_isMine) Board.endGame();
 			return;
 		}
 		_isHidden = true;
@@ -48,21 +47,22 @@ public class Cell {
 		}
 	}
 	
-	private void findNeighborMines() {
+	public void findNeighborMines() {
 		
 		_neighborMines = 0;
-		int size = Board.getBoard().length;
+		int size = Board.getBoard().length - 1;
 		
 		 int myRow = -1, myCol = -1;
 		 for (int row = -1; row < 3; row++) {
 			 myRow = yCoord + row;
 			 if (myRow < 0) continue;
-			 if (myRow >= size) break;
+			 if (myRow > size) break;
 			 for (int col = -1; col < 3; col++) {
 				 myCol = xCoord + col;
-				 if (xCoord < 0) continue;
-				 if (xCoord >= size) break;
+				 if (myCol < 0) continue;
+				 if (myCol > size) break;
 				 if (Board.getBoard()[myRow][myCol].isMine()) _neighborMines++;
+				 
 			 }
 		 }
 	}
