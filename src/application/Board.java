@@ -31,6 +31,7 @@ public class Board {
 	
 	public static void revealCell(int x, int y) {
 		Cell cell = _board[x][y];
+		if(!cell.isHidden()) return;
 		cell.changeHiddenStatus();
 		if(cell.isMine()) {
 			endGame();
@@ -51,7 +52,7 @@ public class Board {
 	
 	private static void revealNeighbors(Cell c, int x, int y) {
 		if (c.isMine() || !c.isHidden()) {
-			System.out.println("Invalid cell");
+			System.out.println("Invalid cell at " + x + "," + y);
 			return;}
 		if (c._neighborMines == -1) {c.findNeighborMines();}
 		if (c._neighborMines == 0) {
