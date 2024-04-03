@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -62,15 +63,33 @@ public class GameSceneController {
 							//Left Click
 							int row = GridPane.getRowIndex(button);
 							int col = GridPane.getColumnIndex(button);
-							System.out.println(
-									"Button clicked at: " + 
-									row + 
-									", " +
-									col
-									);
-	
-							Board.revealCell(row, col);
-							updateBoardVisuals();
+							
+							
+							if(e.getButton() == MouseButton.SECONDARY) {
+								if(Board._board[row][col]._isFlagged) {
+									Board._board[row][col]._isFlagged = false;
+									Board.decrementFlag();
+									System.out.println("dec");
+								}
+								else if(!Board._board[row][col]._isFlagged && Board.getFlag() < 10) {
+									Board._board[row][col]._isFlagged = true;
+									Board.incrementFlag();
+									System.out.println("inc");
+								}
+//								MinesLeft.setText(Integer.toString(Board.getFlag()));
+								updateBoardVisuals();
+							}
+							else if (e.getButton() == MouseButton.PRIMARY){
+								System.out.println(
+										"Button clicked at: " + 
+										row + 
+										", " +
+										col
+										);
+		
+								Board.revealCell(row, col);
+								updateBoardVisuals();
+							}
 						}
 				});
 				
@@ -109,11 +128,7 @@ public class GameSceneController {
 			Cell c = Board.getBoard()[y][x];
 			c.determineDisplayCharacter();
 			
-			// count flags left
-			
-//			if (c._displayCharacter == "?") {
-//				MinesLeft.setText("10");
-//			}
+			MinesLeft.setText(Integer.toString(10 - Board.getFlag()));
 			
 			Button b = (Button)children.get(i);
 			b.setText(c._displayCharacter);
