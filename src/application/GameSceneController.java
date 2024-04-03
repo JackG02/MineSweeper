@@ -6,8 +6,10 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.Priority;
@@ -51,17 +53,27 @@ public class GameSceneController {
 				Button button = createButton();
 				gameBoard.add(button, colIndex, rowIndex);
 				//http://www.java2s.com/example/java-api/javafx/scene/control/button/setonaction-1-0.html
-				
-				
-				button.setOnAction( new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						System.out.println(
-								"Button clicked at: " + 
-								GridPane.getRowIndex(button) + 
-								", " + 
-								GridPane.getColumnIndex(button));
+			
+				button.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+					
+					
+					@Override
+					public void handle(MouseEvent e) {
+						System.out.println(e.getButton().toString());
 					}
 				});
+				
+				
+//				button.setOnAction( new EventHandler<ActionEvent>() {
+//					public void handle(ActionEvent event) {
+//						System.out.println(
+//								"Button clicked at: " + 
+//								GridPane.getRowIndex(button) + 
+//								", " + 
+//								GridPane.getColumnIndex(button));
+//					}
+//				});
+				
 					
 			}
 			
@@ -73,7 +85,7 @@ public class GameSceneController {
 	// creates empty button size 30 by 30 for gridPane
 	private Button createButton() {
 		Button button = new Button();
-		button.setMaxSize(30, 30);
+		button.setMaxSize(35, 35);
 		return button;
 	}
 	
@@ -85,6 +97,12 @@ public class GameSceneController {
 			
 			Cell c = Board.getBoard()[y][x];
 			c.determineDisplayCharacter();
+			
+			// count flags left
+			
+//			if (c._displayCharacter == "?") {
+//				MinesLeft.setText("10");
+//			}
 			
 			Button b = (Button)children.get(i);
 			b.setText(c._displayCharacter);
@@ -99,4 +117,9 @@ public class GameSceneController {
 		System.out.println("End Game - Controller");
 		return;
 	}
+	@FXML
+	public void testMouseClick(MouseEvent e) {
+		System.out.println("test");
+	}
+	
 }
