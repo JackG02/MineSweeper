@@ -29,6 +29,10 @@ public class Cell {
 	}
 	
 	public void determineDisplayCharacter() {
+		if (_isMine) {
+			_displayCharacter = "B";
+			return;
+		}
 		if (_isHidden) {
 			if (_isFlagged) {
 				_displayCharacter = "?";

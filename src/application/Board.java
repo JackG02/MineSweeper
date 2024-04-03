@@ -1,4 +1,5 @@
 package application;
+import java.util.Random;
 
 public class Board {
 	
@@ -9,9 +10,27 @@ public class Board {
 	static int numHidden = 0;
 	
 	public static void buildBoard() {
+		Random rand = new Random();
+		int[] randRows = new int[10];
+		int[] randCols = new int[10];
+		for(int i = 0; i < 10; i++) {
+			randRows[i] = rand.nextInt(10);
+			randCols[i] = rand.nextInt(10);
+		}
+		
+		
+		int randIndex = 0;
+		
 		for (int row = 0; row < 10; row++) {
 			for (int col = 0; col < 10; col++) {
+				
 				_board[row][col] = new Cell(row, col);
+				
+				if(randRows[randIndex] == row && randCols[randIndex] == col) {
+					System.out.println("setting mine at: (" + row + "," + col + ")" );
+					_board[randRows[randIndex]][randCols[randIndex]].setMine();
+					randIndex++;
+				}
 			}
 		}
 	}
@@ -44,10 +63,15 @@ public class Board {
 		if(cell._neighborMines == 0) {
 
 			System.out.println("Revealing cell neighbors");
-			if (x < _board.length - 1) revealNeighbors(_board[x - 1][y], x + 1, y);
-			if (x > 0) revealNeighbors(_board[x - 1][y], x - 1, y);
-			if (y < _board.length - 1) revealNeighbors(_board[x][y + 1], x, y + 1);
-			if (y > 0) revealNeighbors(_board[x][y - 1], x, y - 1);
+			int right = x + 1;
+			int left = x - 1;
+			if (x < _board.length - 1) revealNeighbors(_board[right][y], right, y);
+			if (x > 0) revealNeighbors(_board[left][y], left, y);
+			
+			int up = y - 1;
+			int down = y + 1;
+			if (y < _board.length - 1) revealNeighbors(_board[x][down], x, down);
+			if (y > 0) revealNeighbors(_board[x][up], x, up);
 		}
 	}
 	
@@ -59,10 +83,15 @@ public class Board {
 		if (c._neighborMines == 0) {
 			c.changeHiddenStatus();
 			
-			if (x < _board.length - 1) revealNeighbors(_board[x - 1][y], x + 1, y);
-			if (x > 0) revealNeighbors(_board[x - 1][y], x - 1, y);
-			if (y < _board.length - 1) revealNeighbors(_board[x][y + 1], x, y + 1);
-			if (y > 0) revealNeighbors(_board[x][y - 1], x, y - 1);
+			int right = x + 1;
+			int left = x - 1;
+			if (x < _board.length - 1) revealNeighbors(_board[right][y], right, y);
+			if (x > 0) revealNeighbors(_board[left][y], left, y);
+			
+			int up = y - 1;
+			int down = y + 1;
+			if (y < _board.length - 1) revealNeighbors(_board[x][down], x, down);
+			if (y > 0) revealNeighbors(_board[x][up], x, up);
 		}
 		
 	}
