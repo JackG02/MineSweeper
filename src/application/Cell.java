@@ -7,17 +7,17 @@ public class Cell {
 	boolean _isFlagged;
 	int _neighborMines;
 	
-	int xCoord;
-	int yCoord;
+	int colCoord;
+	int rowCoord;
 	
 	String _displayCharacter;
 	
-	public Cell(int x, int y) {
+	public Cell(int row, int col) {
 		_isHidden = true;
 		_isMine = false;
 		_neighborMines = -1;
-		xCoord = x;
-		yCoord = y;
+		colCoord = col;
+		rowCoord = row;
 	}
 	
 	public void changeHiddenStatus() {
@@ -57,12 +57,12 @@ public class Cell {
 		int size = Board.getBoard().length - 1;
 		
 		 int myRow = -1, myCol = -1;
-		 for (int row = -1; row < 3; row++) {
-			 myRow = yCoord + row;
+		 for (int row = -1; row < 2; row++) {
+			 myRow = rowCoord + row;
 			 if (myRow < 0) continue;
 			 if (myRow > size) break;
-			 for (int col = -1; col < 3; col++) {
-				 myCol = xCoord + col;
+			 for (int col = -1; col < 2; col++) {
+				 myCol = colCoord + col;
 				 if (myCol < 0) continue;
 				 if (myCol > size) break;
 				 if (Board.getBoard()[myRow][myCol].isMine()) _neighborMines++;
@@ -83,12 +83,12 @@ public class Cell {
 		return _isMine;
 	}
 	
-	public int getX() {
-		return xCoord;
+	public int getCol() {
+		return colCoord;
 	}
 	
-	public int getY() {
-		return yCoord;
+	public int getRow() {
+		return rowCoord;
 	}
 }
 

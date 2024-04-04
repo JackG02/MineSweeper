@@ -3,23 +3,24 @@ package application;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-class CellTest {
+public class CellTest {
 
 	@Test
-	void constructTest() {
-		Cell cell = new Cell(1,1);
-		assertEquals(1, cell.getX());
+	public void constructTest() {
+		Cell cell = new Cell(1,3);
+		assertEquals(1, cell.getRow());
+		assertEquals(3, cell.getCol());
 	}
 	
 	@Test
-	void changeHiddenStatusTest() {
+	public void changeHiddenStatusTest() {
 		Cell cell = new Cell(1,1);
 		cell.changeHiddenStatus();
 		assertFalse(cell.isHidden());
 	}
 	
 	@Test
-	void determineFlaggedDisplayTest() {
+	public void determineFlaggedDisplayTest() {
 		Cell cell = new Cell(1,1);
 		cell._isFlagged = true;
 		cell.determineDisplayCharacter();
@@ -27,14 +28,14 @@ class CellTest {
 	}
 	
 	@Test
-	void determineHiddenDisplayTest() {
+	public void determineHiddenDisplayTest() {
 		Cell cell = new Cell(1,1);
 		cell.determineDisplayCharacter();
 		assertEquals("x", cell._displayCharacter);
 	}
 	
 	@Test
-	void determineEmptyDisplayTest() {
+	public void determineEmptyDisplayTest() {
 		Cell cell = new Cell(1,1);
 		cell.changeHiddenStatus();
 		
@@ -47,7 +48,7 @@ class CellTest {
 	}
 	
 	@Test
-	void determineNeighborDisplayTest() {
+	public void determineNeighborDisplayTest() {
 		Cell cell = new Cell(1,1);
 		cell.changeHiddenStatus();
 		
@@ -66,12 +67,6 @@ class CellTest {
 		cell.determineDisplayCharacter();
 
 		assertEquals("8", cell._displayCharacter);
-	}
-	
-	@Test
-	void Test() {
-		Cell cell = new Cell(1,1);
-		
 	}
 
 }

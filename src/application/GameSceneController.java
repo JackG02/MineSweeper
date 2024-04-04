@@ -1,7 +1,6 @@
 package application;
 
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
@@ -9,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Control;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.Priority;
@@ -118,11 +116,6 @@ public class GameSceneController {
 			Button b = (Button)children.get(i);
 			b.setText(c._displayCharacter);
 		}
-	}
-	
-	private void buttonClick(int row, int col) {
-		System.out.println("Button clicked at: " + row + ", " + col);
-		Board.revealCell(row, col);
 	}
 		
 	public static void endGame() {

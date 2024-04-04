@@ -10,27 +10,20 @@ public class Board {
 	static int numHidden = 0;
 	
 	public static void buildBoard() {
-		Random rand = new Random();
-		int[] randRows = new int[10];
-		int[] randCols = new int[10];
-		for(int i = 0; i < 10; i++) {
-			randRows[i] = rand.nextInt(10);
-			randCols[i] = rand.nextInt(10);
-		}
-		
-		
-		int randIndex = 0;
-		
+
 		for (int row = 0; row < 10; row++) {
 			for (int col = 0; col < 10; col++) {
-				
 				_board[row][col] = new Cell(row, col);
-				
-				if(randRows[randIndex] == row && randCols[randIndex] == col) {
-					System.out.println("setting mine at: (" + row + "," + col + ")" );
-					_board[randRows[randIndex]][randCols[randIndex]].setMine();
-					randIndex++;
-				}
+			}
+		}
+		
+		Random rand = new Random();
+		for (int i = 0; i < 10; i++) {
+			int randRow = rand.nextInt(10);
+			int randCol = rand.nextInt(10);
+			if(!_board[randRow][randCol].isMine()) {
+				System.out.println("setting mine at: (" + randRow + "," + randCol + ")" );
+				_board[randRow][randCol].setMine();
 			}
 		}
 	}
