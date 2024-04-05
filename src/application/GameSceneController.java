@@ -137,9 +137,5 @@ public class GameSceneController {
 		System.out.println("End Game - Controller");
 		return;
 	}
-	@FXML
-	public void testMouseClick(MouseEvent e) {
-		System.out.println("test");
-	}
 	
 }
