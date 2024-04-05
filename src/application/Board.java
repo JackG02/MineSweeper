@@ -24,11 +24,13 @@ public class Board {
 			if(!_board[randRow][randCol].isMine()) {
 				System.out.println("setting mine at: (" + randRow + "," + randCol + ")" );
 				_board[randRow][randCol].setMine();
+			}else {
+				i -= 1;
 			}
 		}
 	}
 	
-	public void checkBoard() {
+	public static void checkBoard() {
 		int hidden1 = 0;
 		for (int row = 0; row < 10; row++) {
 			for (int col = 0; col < 10; col++) {
@@ -39,7 +41,7 @@ public class Board {
 			}
 		} 
 		Board.numHidden = hidden1;
-		if (numHidden == mines) endGame();
+		if (numHidden == mines) endGame(true);
 	}
 	
 	public static void revealCell(int x, int y) {
@@ -47,11 +49,12 @@ public class Board {
 		if(!cell.isHidden()) return;
 		cell.changeHiddenStatus();
 		if(cell.isMine()) {
-			endGame();
+			endGame(false);
 			return;
 		}
 		
 		cell.determineDisplayCharacter();
+		checkBoard();
 		System.out.println("Cell neighbor mines: " + cell._neighborMines);
 		if(cell._neighborMines == 0) {
 
@@ -73,9 +76,11 @@ public class Board {
 			System.out.println("Invalid cell at " + x + "," + y);
 			return;}
 		if (c._neighborMines == -1) {c.findNeighborMines();}
+		
+		c.changeHiddenStatus();
+		checkBoard();
+		
 		if (c._neighborMines == 0) {
-			c.changeHiddenStatus();
-			
 			int right = x + 1;
 			int left = x - 1;
 			if (x < _board.length - 1) revealNeighbors(_board[right][y], right, y);
@@ -85,6 +90,8 @@ public class Board {
 			int down = y + 1;
 			if (y < _board.length - 1) revealNeighbors(_board[x][down], x, down);
 			if (y > 0) revealNeighbors(_board[x][up], x, up);
+		}else {
+			c.determineDisplayCharacter();
 		}
 		
 	}
@@ -93,9 +100,9 @@ public class Board {
 		return _board;
 	}
 	
-	public static void endGame() {
+	public static void endGame(boolean isWin) {
 		System.out.println("End Game - Board");
-		GameSceneController.endGame();
+		controller.endGame(isWin);
 	}
 	
 	public static void assignController(GameSceneController c) {

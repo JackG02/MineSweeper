@@ -11,10 +11,16 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.text.Text;
 import javafx.scene.layout.Priority;
 
 
 public class GameSceneController {
+	
+	@FXML
+	private Label topLabel;
+	@FXML
+	private Label bottomLabel;
 	@FXML
 	private Label MinesLeft;
 	@FXML
@@ -133,8 +139,15 @@ public class GameSceneController {
 		}
 	}
 		
-	public static void endGame() {
+	public void endGame(boolean isWin) {
 		System.out.println("End Game - Controller");
+		
+		topLabel.setText("Game Over");
+		if(isWin) {
+			bottomLabel.setText("You Win!");
+		}else {
+			bottomLabel.setText("You Lose!");
+		}
 		return;
 	}
 	
