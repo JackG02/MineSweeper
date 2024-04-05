@@ -90,5 +90,7 @@ public class Cell {
 	public int getRow() {
 		return rowCoord;
 	}
+	
+	//Test
 }
 
